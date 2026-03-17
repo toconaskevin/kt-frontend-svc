@@ -2,7 +2,7 @@
 
 import { useMemo, useRef } from "react";
 
-export function Carousel<T extends { id?: string }>({
+export function Carousel<T extends object>({
   title,
   items,
   getKey,
@@ -20,7 +20,8 @@ export function Carousel<T extends { id?: string }>({
     () =>
       items.map(
         (item, idx) =>
-          getKey?.(item, idx) ?? (item.id ? String(item.id) : String(idx))
+          getKey?.(item, idx) ??
+          ("id" in item && item.id != null ? String(item.id) : String(idx))
       ),
     [items, getKey]
   );
