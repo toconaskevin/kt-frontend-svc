@@ -6,14 +6,9 @@ WORKDIR /app
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 
-COPY package.json package-lock.json* pnpm-lock.yaml* bun.lockb* ./ || true
+COPY package.json package-lock.json ./
 
-RUN \
-  if [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then npm install -g pnpm && pnpm install --frozen-lockfile; \
-  elif [ -f bun.lockb ]; then npm install -g bun && bun install --frozen-lockfile; \
-  else npm install; \
-  fi
+RUN npm ci
 
 # Build the app
 FROM base AS builder
