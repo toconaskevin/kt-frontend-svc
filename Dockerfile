@@ -15,6 +15,10 @@ FROM base AS builder
 
 ENV NODE_ENV=production
 
+# Baked into the client JS at build time — must be your public kt-ingress-svc URL (https://…)
+ARG NEXT_PUBLIC_API_GATEWAY_URL
+ENV NEXT_PUBLIC_API_GATEWAY_URL=${NEXT_PUBLIC_API_GATEWAY_URL}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
