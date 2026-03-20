@@ -15,13 +15,15 @@ FROM base AS builder
 
 ENV NODE_ENV=production
 
-# Baked into the client JS at build time — must be your public kt-ingress-svc URL (https://…)
+# Baked into the client JS at build time — must be your public kt-ingress-svc URL (https://…).
+# Cloud Build / CI must pass: --build-arg NEXT_PUBLIC_API_GATEWAY_URL=https://kt-ingress-svc-….run.app
 ARG NEXT_PUBLIC_API_GATEWAY_URL
 ENV NEXT_PUBLIC_API_GATEWAY_URL=${NEXT_PUBLIC_API_GATEWAY_URL}
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+RUN test -n "$NEXT_PUBLIC_API_GATEWAY_URL" || (echo "NEXT_PUBLIC_API_GATEWAY_URL is required at build (see Dockerfile)" >&2; exit 1)
 RUN npm run build
 
 # Production image, copy all the files and run next
