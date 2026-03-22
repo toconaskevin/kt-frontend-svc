@@ -16,20 +16,16 @@ export default function Home() {
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([
+    Promise.allSettled([
       api.profile.getFull("me"),
       api.projects.latest(5),
       api.blog.latest(5),
-    ])
-      .then(([p, pr, po]) => {
-        if (cancelled) return;
-        setProfile(p);
-        setProjects(pr);
-        setPosts(po);
-      })
-      .catch(() => {
-        // Home should still render even if one service is down.
-      });
+    ]).then(([profileRes, projectsRes, postsRes]) => {
+      if (cancelled) return;
+      if (profileRes.status === "fulfilled") setProfile(profileRes.value);
+      if (projectsRes.status === "fulfilled") setProjects(projectsRes.value);
+      if (postsRes.status === "fulfilled") setPosts(postsRes.value);
+    });
     return () => {
       cancelled = true;
     };
