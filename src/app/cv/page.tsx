@@ -26,9 +26,6 @@ export default function CVPage() {
           >
             Download CV (PDF)
           </a>
-          <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
-            If the CV is not yet uploaded to the object store, this link may return 404 or an error.
-          </p>
         </div>
       </div>
       </div>
