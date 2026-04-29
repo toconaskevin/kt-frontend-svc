@@ -13,6 +13,7 @@ export default function Home() {
   const [profile, setProfile] = useState<FullProfile | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [dataReady, setDataReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -25,6 +26,8 @@ export default function Home() {
       if (profileRes.status === "fulfilled") setProfile(profileRes.value);
       if (projectsRes.status === "fulfilled") setProjects(projectsRes.value);
       if (postsRes.status === "fulfilled") setPosts(postsRes.value);
+    }).finally(() => {
+      if (!cancelled) setDataReady(true);
     });
     return () => {
       cancelled = true;
@@ -38,12 +41,27 @@ export default function Home() {
       <main className="mx-auto max-w-5xl px-6 py-10">
         <div className="flex flex-col items-center text-center">
           <div className="w-full max-w-2xl">
-            <h1 className="mt-10 text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-              {profile?.name ?? "Your Name"}
-            </h1>
-            <p className="mt-3 text-lg text-zinc-600 dark:text-zinc-400">
-              {profile?.profile_headline ?? "Professional headline"}
-            </p>
+            {!dataReady ? (
+              <div
+                className="mt-10 flex flex-col items-center gap-3"
+                aria-busy="true"
+                aria-label="Loading profile"
+              >
+                <div className="h-10 w-[min(12rem,55%)] animate-pulse rounded-md bg-zinc-200 dark:bg-zinc-800" />
+                <div className="h-6 w-[min(18rem,85%)] animate-pulse rounded-md bg-zinc-200 dark:bg-zinc-800" />
+              </div>
+            ) : (
+              <>
+                <h1 className="mt-10 text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                  {profile?.name ?? ""}
+                </h1>
+                {profile?.profile_headline ? (
+                  <p className="mt-3 text-lg text-zinc-600 dark:text-zinc-400">
+                    {profile.profile_headline}
+                  </p>
+                ) : null}
+              </>
+            )}
           </div>
         </div>
 
@@ -51,6 +69,7 @@ export default function Home() {
           <Carousel
             title="Projects"
             items={projects}
+            loading={!dataReady}
             getKey={(p, idx) => p._id ?? String(idx)}
             emptyText="No projects yet."
             renderItem={(p) => (
@@ -65,6 +84,7 @@ export default function Home() {
           <Carousel
             title="Blog"
             items={posts}
+            loading={!dataReady}
             getKey={(p) => p.id}
             emptyText="No posts yet."
             renderItem={(p) => (

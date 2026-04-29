@@ -8,12 +8,14 @@ export function Carousel<T extends object>({
   getKey,
   renderItem,
   emptyText = "Nothing to show yet.",
+  loading = false,
 }: {
   title: string;
   items: T[];
   getKey?: (item: T, idx: number) => string;
   renderItem: (item: T) => React.ReactNode;
   emptyText?: string;
+  loading?: boolean;
 }) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const keys = useMemo(
@@ -56,7 +58,24 @@ export function Carousel<T extends object>({
         </div>
       </div>
 
-      {items.length === 0 ? (
+      {loading && items.length === 0 ? (
+        <div
+          ref={scrollerRef}
+          className="mt-3 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-busy="true"
+          aria-label={`Loading ${title}`}
+        >
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="min-w-[240px] max-w-[240px] shrink-0 rounded-lg border border-zinc-200 bg-zinc-50 p-3 dark:border-zinc-800 dark:bg-zinc-950"
+            >
+              <div className="h-4 w-4/5 max-w-[180px] animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+              <div className="mt-2 h-3 w-3/5 max-w-[120px] animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+            </div>
+          ))}
+        </div>
+      ) : items.length === 0 ? (
         <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
           {emptyText}
         </p>
