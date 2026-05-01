@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppNav } from "@/components/AppNav";
 import { Carousel } from "@/components/Carousel";
@@ -35,7 +34,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+    <div className="neon-page">
       <AppNav />
 
       <main className="mx-auto max-w-5xl px-6 py-10">
@@ -47,16 +46,16 @@ export default function Home() {
                 aria-busy="true"
                 aria-label="Loading profile"
               >
-                <div className="h-10 w-[min(12rem,55%)] animate-pulse rounded-md bg-zinc-200 dark:bg-zinc-800" />
-                <div className="h-6 w-[min(18rem,85%)] animate-pulse rounded-md bg-zinc-200 dark:bg-zinc-800" />
+                <div className="h-10 w-[min(12rem,55%)] animate-pulse rounded-md bg-white/10" />
+                <div className="h-6 w-[min(18rem,85%)] animate-pulse rounded-md bg-white/10" />
               </div>
             ) : (
               <>
-                <h1 className="mt-10 text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                <h1 className="mt-10 text-4xl font-semibold tracking-tight">
                   {profile?.name ?? ""}
                 </h1>
                 {profile?.profile_headline ? (
-                  <p className="mt-3 text-lg text-zinc-600 dark:text-zinc-400">
+                  <p className="neon-muted mt-3 text-lg">
                     {profile.profile_headline}
                   </p>
                 ) : null}
@@ -65,36 +64,42 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
-          <Carousel
-            title="Projects"
-            items={projects}
-            loading={!dataReady}
-            getKey={(p, idx) => p._id ?? String(idx)}
-            emptyText="No projects yet."
-            renderItem={(p) => (
-              <div>
-                <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                  {p.name ?? "Untitled project"}
+        <div className="mt-14 flex flex-col gap-6">
+          <div className="min-w-0">
+            <Carousel
+              title="Projects"
+              items={projects}
+              loading={!dataReady}
+              overlayControls
+              getKey={(p, idx) => p._id ?? String(idx)}
+              emptyText="No projects yet."
+              renderItem={(p) => (
+                <div>
+                  <div className="text-sm font-medium">
+                    {p.name ?? "Untitled project"}
+                  </div>
                 </div>
-              </div>
-            )}
-          />
+              )}
+            />
+          </div>
 
-          <Carousel
-            title="Blog"
-            items={posts}
-            loading={!dataReady}
-            getKey={(p) => p.id}
-            emptyText="No posts yet."
-            renderItem={(p) => (
-              <div>
-                <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                  {p.title ?? "Untitled post"}
+          <div className="min-w-0">
+            <Carousel
+              title="Blog"
+              items={posts}
+              loading={!dataReady}
+              overlayControls
+              getKey={(p) => p.id}
+              emptyText="No posts yet."
+              renderItem={(p) => (
+                <div>
+                  <div className="text-sm font-medium">
+                    {p.title ?? "Untitled post"}
+                  </div>
                 </div>
-              </div>
-            )}
-          />
+              )}
+            />
+          </div>
         </div>
       </main>
     </div>

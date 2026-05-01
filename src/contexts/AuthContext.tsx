@@ -27,8 +27,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem(TOKEN_KEY);
-    if (stored) setTokenState(stored);
-    setIsReady(true);
+    Promise.resolve().then(() => {
+      if (stored) setTokenState(stored);
+      setIsReady(true);
+    });
   }, []);
 
   const login = useCallback((newToken: string) => {

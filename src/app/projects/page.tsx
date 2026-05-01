@@ -35,33 +35,30 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+    <div className="neon-page">
       <AppNav />
       <div className="px-4 py-8">
       <div className="mx-auto max-w-2xl">
-        <h1 className="mt-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
-          Projects
-        </h1>
-        <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-          List of projects
-        </p>
-        <div className="mt-6 rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-          {loading && <p className="text-zinc-500">Loading…</p>}
+        <h1 className="mt-4 text-2xl font-semibold">Projects</h1>
+        <p className="neon-muted mt-1 text-sm">List of projects</p>
+        <div className="neon-surface mt-6 p-6">
+          {loading && <p className="neon-muted">Loading…</p>}
           {error && (
             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
           )}
           {!loading && !error && (
             <ul className="space-y-4">
               {projects.length === 0 ? (
-                <li className="text-zinc-500">No projects yet.</li>
+                <li className="neon-muted">No projects yet.</li>
               ) : (
-                projects.map((p) => (
-                  <li key={p._id ?? p.name ?? Math.random()} className="border-b border-zinc-100 pb-4 last:border-0 dark:border-zinc-800">
-                    <div className="font-medium text-zinc-900 dark:text-zinc-100">
-                      {p.name ?? "Untitled"}
-                    </div>
+                projects.map((p, idx) => (
+                  <li
+                    key={p._id ?? p.name ?? String(idx)}
+                    className="neon-divider border-b pb-4 last:border-0"
+                  >
+                    <div className="font-medium">{p.name ?? "Untitled"}</div>
                     {p.description && (
-                      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                      <p className="neon-muted mt-1 text-sm">
                         {p.description}
                       </p>
                     )}
@@ -70,7 +67,7 @@ export default function ProjectsPage() {
                         href={p.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-2 inline-block text-sm text-zinc-600 underline hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                        className="neon-link mt-2 inline-block text-sm"
                       >
                         {p.url}
                       </a>

@@ -17,7 +17,7 @@ export function GatewayStatus() {
   }, []);
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-800 dark:bg-zinc-900/50">
+    <div className="neon-card px-4 py-3">
       <div className="flex items-center gap-2 text-sm">
         <span
           className={`h-2 w-2 rounded-full ${
@@ -29,7 +29,7 @@ export function GatewayStatus() {
           }`}
           aria-hidden
         />
-        <span className="text-zinc-600 dark:text-zinc-400">
+        <span className="neon-muted">
           {status === "checking" && "Checking service availability…"}
           {status === "ok" && `Services are available`}
           {status === "error" && `Services are not available. Please check the logs for more information.`}

@@ -23,7 +23,7 @@ function Section({
 }) {
   return (
     <section className="mt-8">
-      <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 border-b border-zinc-200 dark:border-zinc-700 pb-2">
+      <h2 className="neon-divider border-b pb-2 text-lg font-semibold">
         {title}
       </h2>
       <div className="mt-3">{children}</div>
@@ -38,8 +38,6 @@ export default function ProfilePage() {
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
     api.profile
       .getFull("me")
       .then((res) => {
@@ -57,19 +55,15 @@ export default function ProfilePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+    <div className="neon-page">
       <AppNav />
       <div className="px-4 py-8">
       <div className="mx-auto max-w-2xl">
-        <h1 className="mt-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
-          Profile
-        </h1>
-        <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-          Professional profile
-        </p>
+        <h1 className="mt-4 text-2xl font-semibold">Profile</h1>
+        <p className="neon-muted mt-1 text-sm">Professional profile</p>
 
-        <div className="mt-6 rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-          {loading && <p className="text-zinc-500">Loading…</p>}
+        <div className="neon-surface mt-6 p-6">
+          {loading && <p className="neon-muted">Loading…</p>}
           {error && (
             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
           )}
@@ -77,19 +71,15 @@ export default function ProfilePage() {
             <>
               <div className="space-y-1">
                 {profile.profile_headline && (
-                  <p className="text-zinc-700 dark:text-zinc-300 font-medium">
+                  <p className="font-medium">
                     {profile.profile_headline}
                   </p>
                 )}
                 {profile.email && (
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                    {profile.email}
-                  </p>
+                  <p className="neon-muted text-sm">{profile.email}</p>
                 )}
                 {profile.location && (
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                    {profile.location}
-                  </p>
+                  <p className="neon-muted text-sm">{profile.location}</p>
                 )}
                 {profile.social_media && profile.social_media.length > 0 && (
                   <ul className="flex flex-wrap gap-3 mt-2">
@@ -99,7 +89,7 @@ export default function ProfilePage() {
                           href={s.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 underline"
+                          className="neon-link text-sm"
                         >
                           {s.platform || s.url}
                         </a>
@@ -115,11 +105,11 @@ export default function ProfilePage() {
                     {profile.core_competencies.map((c) => (
                       <li
                         key={c.id}
-                        className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 text-sm text-zinc-700 dark:text-zinc-300"
+                        className="neon-pill rounded-md px-2.5 py-1 text-sm"
                       >
                         {c.name}
                         {c.category && (
-                          <span className="text-zinc-500 dark:text-zinc-400 ml-1">
+                          <span className="neon-muted ml-1">
                             ({c.category})
                           </span>
                         )}
@@ -134,27 +124,23 @@ export default function ProfilePage() {
                   <ul className="space-y-5">
                     {profile.professional_experience.map((exp) => (
                       <li key={exp.id} className="text-sm">
-                        <div className="font-medium text-zinc-900 dark:text-zinc-100">
+                        <div className="font-medium">
                           {exp.role} at {exp.company}
                         </div>
                         {exp.location && (
-                          <div className="text-zinc-500 dark:text-zinc-500">
-                            {exp.location}
-                          </div>
+                          <div className="neon-muted-2">{exp.location}</div>
                         )}
                         {(exp.start_date || exp.end_date) && (
-                          <div className="text-zinc-500 dark:text-zinc-500 mt-0.5">
+                          <div className="neon-muted-2 mt-0.5">
                             {formatMonthYear(exp.start_date)} –{" "}
                             {exp.end_date ? formatMonthYear(exp.end_date) : "Present"}
                           </div>
                         )}
                         {exp.description && (
-                          <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-                            {exp.description}
-                          </p>
+                          <p className="neon-muted mt-2">{exp.description}</p>
                         )}
                         {exp.highlights && exp.highlights.length > 0 && (
-                          <ul className="mt-2 list-disc list-inside space-y-0.5 text-zinc-600 dark:text-zinc-400">
+                          <ul className="neon-muted mt-2 list-disc list-inside space-y-0.5">
                             {exp.highlights.map((h, i) => (
                               <li key={i}>{h}</li>
                             ))}
@@ -171,24 +157,20 @@ export default function ProfilePage() {
                   <ul className="space-y-4">
                     {profile.education.map((e) => (
                       <li key={e.id} className="text-sm">
-                        <div className="font-medium text-zinc-900 dark:text-zinc-100">
-                          {e.institution}
-                        </div>
+                        <div className="font-medium">{e.institution}</div>
                         {(e.degree || e.field) && (
-                          <div className="text-zinc-600 dark:text-zinc-400">
+                          <div className="neon-muted">
                             {[e.degree, e.field].filter(Boolean).join(" · ")}
                           </div>
                         )}
                         {(e.start_date || e.end_date) && (
-                          <div className="text-zinc-500 dark:text-zinc-500 mt-0.5">
+                          <div className="neon-muted-2 mt-0.5">
                             {formatMonthYear(e.start_date)} –{" "}
                             {e.end_date ? formatMonthYear(e.end_date) : "Present"}
                           </div>
                         )}
                         {e.description && (
-                          <p className="mt-1 text-zinc-600 dark:text-zinc-400">
-                            {e.description}
-                          </p>
+                          <p className="neon-muted mt-1">{e.description}</p>
                         )}
                       </li>
                     ))}
@@ -201,16 +183,12 @@ export default function ProfilePage() {
                   <ul className="space-y-3 text-sm">
                     {profile.certifications.map((c) => (
                       <li key={c.id}>
-                        <div className="font-medium text-zinc-900 dark:text-zinc-100">
-                          {c.name}
-                        </div>
+                        <div className="font-medium">{c.name}</div>
                         {c.issuer && (
-                          <div className="text-zinc-600 dark:text-zinc-400">
-                            {c.issuer}
-                          </div>
+                          <div className="neon-muted">{c.issuer}</div>
                         )}
                         {(c.issued_at || c.expiry_at) && (
-                          <div className="text-zinc-500 dark:text-zinc-500">
+                          <div className="neon-muted-2">
                             {formatMonthYear(c.issued_at)}
                             {c.expiry_at && ` – ${formatMonthYear(c.expiry_at)}`}
                           </div>
@@ -220,7 +198,7 @@ export default function ProfilePage() {
                             href={c.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-600 dark:text-zinc-400 underline"
+                            className="neon-link mt-1 inline-block"
                           >
                             Verify
                           </a>
@@ -233,12 +211,12 @@ export default function ProfilePage() {
 
               {profile.languages.length > 0 && (
                 <Section title="Languages">
-                  <ul className="space-y-1 text-sm text-zinc-700 dark:text-zinc-300">
+                  <ul className="space-y-1 text-sm">
                     {profile.languages.map((l) => (
                       <li key={l.id}>
                         {l.language}
                         {l.proficiency && (
-                          <span className="text-zinc-500 dark:text-zinc-400 ml-2">
+                          <span className="neon-muted ml-2">
                             — {l.proficiency}
                           </span>
                         )}
@@ -256,7 +234,7 @@ export default function ProfilePage() {
                 profile.languages.length === 0 &&
                 profile.certifications.length === 0 &&
                 profile.professional_experience.length === 0 && (
-                  <p className="text-zinc-500 text-sm">
+                  <p className="neon-muted text-sm">
                     Profile is empty. Add data to the profile_db (e.g. update the
                     profiles row and insert into education, core_competencies,
                     etc.).
@@ -265,7 +243,7 @@ export default function ProfilePage() {
             </>
           )}
           {!loading && !error && !profile && (
-            <p className="text-zinc-500">No profile found.</p>
+            <p className="neon-muted">No profile found.</p>
           )}
         </div>
       </div>
