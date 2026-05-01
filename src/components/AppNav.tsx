@@ -7,7 +7,7 @@ export function AppNav() {
   const { token, logout, isReady } = useAuth();
 
   return (
-    <nav className="neon-nav flex flex-wrap items-center gap-4 px-6 py-4">
+    <nav className="neon-nav flex w-full max-w-full min-w-0 flex-wrap items-center gap-4 px-6 py-4">
       <Link
         href="/"
         className="font-medium"

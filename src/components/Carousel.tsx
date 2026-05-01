@@ -117,14 +117,14 @@ export function Carousel<T extends object>({
         <div className="relative mt-3">
           <div
             ref={scrollerRef}
-            className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-4 py-5 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0"
+            className="flex min-w-0 snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-0 py-5 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             aria-busy="true"
             aria-label={`Loading ${title}`}
           >
             {[0, 1, 2].map((i) => (
               <div
                 key={i}
-                className="neon-card flex min-h-[92px] w-[min(320px,calc(100vw-5rem))] shrink-0 snap-center items-center justify-center p-4 text-center sm:w-[320px]"
+                className="neon-card flex min-h-[92px] w-[85%] max-w-[320px] shrink-0 snap-center items-center justify-center p-4 text-center sm:w-[320px]"
               >
                 <div className="w-full">
                   <div className="mx-auto h-4 w-4/5 max-w-[180px] animate-pulse rounded bg-white/10" />
@@ -161,12 +161,12 @@ export function Carousel<T extends object>({
         <div className="relative mt-3">
           <div
             ref={scrollerRef}
-            className="-mx-4 flex min-w-0 snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-4 py-5 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0"
+            className="flex min-w-0 snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-0 py-5 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {items.map((item, idx) => (
               <div
                 key={keys[idx]}
-                className="neon-card flex min-h-[92px] w-[min(320px,calc(100vw-5rem))] shrink-0 snap-center items-center justify-center p-4 text-center sm:w-[320px]"
+                className="neon-card flex min-h-[92px] w-[85%] max-w-[320px] shrink-0 snap-center items-center justify-center p-4 text-center sm:w-[320px]"
               >
                 <div className="w-full">{renderItem(item)}</div>
               </div>

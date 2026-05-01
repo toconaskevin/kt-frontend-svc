@@ -38,8 +38,8 @@ export default function BlogPage() {
   return (
     <div className="neon-page">
       <AppNav />
-      <div className="px-4 py-8">
-      <div className="mx-auto max-w-2xl">
+      <div className="w-full min-w-0 px-4 py-8">
+      <div className="mx-auto w-full min-w-0 max-w-2xl">
         <h1 className="mt-4 text-2xl font-semibold">Blog</h1>
         <p className="neon-muted mt-1 text-sm">List of blog posts</p>
         <div className="neon-surface mt-6 p-6">

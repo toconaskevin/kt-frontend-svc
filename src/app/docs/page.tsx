@@ -82,7 +82,7 @@ export default function DocsPage() {
     <div className="neon-page">
       <AppNav />
 
-      <main className="mx-auto max-w-5xl px-6 py-10">
+      <main className="mx-auto w-full min-w-0 max-w-5xl px-6 py-10">
         <h1 className="text-2xl font-semibold">API Docs</h1>
         <p className="neon-muted mt-2">
           Public endpoints exposed through the gateway.

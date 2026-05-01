@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AppNav } from "@/components/AppNav";
 import { Carousel } from "@/components/Carousel";
+import { SiteFooter } from "@/components/SiteFooter";
 import { api, type FullProfile } from "@/lib/api";
 
 type Project = { _id?: string; name?: string };
@@ -37,9 +38,9 @@ export default function Home() {
     <div className="neon-page">
       <AppNav />
 
-      <main className="mx-auto max-w-5xl px-6 py-10">
-        <div className="flex flex-col items-center text-center">
-          <div className="w-full max-w-2xl">
+      <main className="mx-auto w-full min-w-0 max-w-5xl px-6 py-10">
+        <div className="flex w-full max-w-full min-w-0 flex-col items-center text-center">
+          <div className="w-full max-w-full min-w-0 max-w-2xl">
             {!dataReady ? (
               <div
                 className="mt-10 flex flex-col items-center gap-3"
@@ -51,7 +52,7 @@ export default function Home() {
               </div>
             ) : (
               <>
-                <h1 className="mt-10 text-4xl font-semibold tracking-tight">
+                <h1 className="mt-10 text-3xl font-semibold tracking-tight sm:text-4xl">
                   {profile?.name ?? ""}
                 </h1>
                 {profile?.profile_headline ? (
@@ -102,6 +103,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }

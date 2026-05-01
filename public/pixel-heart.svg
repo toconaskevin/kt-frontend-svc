@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="106" viewBox="0 0 112 106" role="img" aria-label="Pixel heart">
+  <title>Pixel heart</title>
+  <defs>
+    <!-- Palette: neon cyan / pink / purple (same hex as globals.css :root) -->
+    <linearGradient id="pixelHeartGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3be8ff"/>
+      <stop offset="48%" stop-color="#ff4fd8"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="pixelHeartGlow" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3.4" result="glowWide"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.35" result="glowTight"/>
+      <feMerge>
+        <feMergeNode in="glowWide"/>
+        <feMergeNode in="glowTight"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#pixelHeartGlow)">
+    <!-- 9x8 grid: cell=10, gap=2, pad=3 -->
+    <rect x="27" y="3" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="39" y="3" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="63" y="3" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="75" y="3" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="15" y="15" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="27" y="15" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="39" y="15" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="51" y="15" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="63" y="15" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="75" y="15" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="87" y="15" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="3" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="15" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="27" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="39" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="51" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="63" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="75" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="87" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="99" y="27" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="3" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="15" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="27" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="39" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="51" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="63" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="75" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="87" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="99" y="39" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="15" y="51" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="27" y="51" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="39" y="51" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="51" y="51" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="63" y="51" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="75" y="51" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="87" y="51" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="27" y="63" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="39" y="63" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="51" y="63" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="63" y="63" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="75" y="63" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="39" y="75" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="51" y="75" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="63" y="75" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+    <rect x="51" y="87" width="10" height="10" rx="0.8" fill="url(#pixelHeartGrad)" stroke="rgba(59,232,255,0.55)" stroke-width="0.6"/>
+  </g>
+</svg>

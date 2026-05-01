@@ -37,8 +37,8 @@ export default function ProjectsPage() {
   return (
     <div className="neon-page">
       <AppNav />
-      <div className="px-4 py-8">
-      <div className="mx-auto max-w-2xl">
+      <div className="w-full min-w-0 px-4 py-8">
+      <div className="mx-auto w-full min-w-0 max-w-2xl">
         <h1 className="mt-4 text-2xl font-semibold">Projects</h1>
         <p className="neon-muted mt-1 text-sm">List of projects</p>
         <div className="neon-surface mt-6 p-6">
