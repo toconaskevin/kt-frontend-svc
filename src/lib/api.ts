@@ -65,9 +65,11 @@ export async function gatewayFetch<T>(
   const url = path.startsWith("http") ? path : `${GATEWAY_URL}${path}`;
   const token = getToken();
   const headers: HeadersInit = {
-    "Content-Type": "application/json",
     ...(options.headers as Record<string, string>),
   };
+  if (options.body) {
+    (headers as Record<string, string>)["Content-Type"] = "application/json";
+  }
   if (token) {
     (headers as Record<string, string>)["Authorization"] = `Bearer ${token}`;
   }
