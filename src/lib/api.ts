@@ -1,5 +1,5 @@
-const GATEWAY_URL =
-  process.env.NEXT_PUBLIC_API_GATEWAY_URL || "http://localhost:8080";
+/** Same-origin API paths; Next.js rewrites proxy to internal ingress (see next.config.ts). */
+const GATEWAY_URL = "";
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;

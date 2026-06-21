@@ -27,14 +27,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Require NEXT_PUBLIC_API_GATEWAY_URL
-        run: |
-          if [ -z "${{ vars.NEXT_PUBLIC_API_GATEWAY_URL }}" ]; then
-            echo "Set repository variable NEXT_PUBLIC_API_GATEWAY_URL to your public ingress URL (https://…)." >&2
-            echo "Settings → Secrets and variables → Actions → Variables." >&2
-            exit 1
-          fi
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -63,6 +55,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NEXT_PUBLIC_API_GATEWAY_URL=${{ vars.NEXT_PUBLIC_API_GATEWAY_URL }}
+            API_GATEWAY_INTERNAL_URL=${{ vars.API_GATEWAY_INTERNAL_URL || 'http://kt-ingress-svc' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
