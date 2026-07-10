@@ -48,7 +48,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${neonDisplay.variable} ${neonUi.variable} antialiased`}
       >
         <AuthProvider>
-          <div className="flex min-h-screen min-h-[100dvh] w-full max-w-full min-w-0 flex-col overflow-x-hidden">
+          <div className="flex min-h-screen min-h-[100dvh] w-full max-w-full min-w-0 flex-col overflow-x-clip">
             {children}
           </div>
         </AuthProvider>

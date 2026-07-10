@@ -85,6 +85,38 @@ export async function gatewayFetch<T>(
   return res.blob() as unknown as T;
 }
 
+export type AskSource = {
+  type?: string;
+  title?: string;
+  id?: string;
+  url?: string;
+};
+
+export type AskResponse = {
+  answer: string;
+  sources?: AskSource[];
+  recipe?: string;
+};
+
+export type BlogPost = {
+  id: string;
+  title?: string;
+  slug?: string;
+  excerpt?: string;
+  cover_image_url?: string | null;
+  tags?: string[];
+  published_at?: string;
+};
+
+export type BlogPostDetail = BlogPost & {
+  content?: string | null;
+};
+
+export type BlogPostsPage = {
+  items: BlogPost[];
+  next_cursor: string | null;
+};
+
 export const api = {
   // auth: {
   //   register: (email: string, password: string) =>
@@ -125,17 +157,38 @@ export const api = {
       ),
   },
   blog: {
-    posts: () =>
-      gatewayFetch<
-        Array<{ id: string; title?: string; slug?: string; excerpt?: string; published_at?: string }>
-      >("/blog/posts"),
-    latest: (limit = 5) =>
-      gatewayFetch<
-        Array<{ id: string; title?: string; slug?: string; excerpt?: string; published_at?: string }>
-      >(`/blog/posts?limit=${encodeURIComponent(String(limit))}`),
+    posts: (opts?: { limit?: number; cursor?: string | null; tag?: string }) => {
+      const params = new URLSearchParams();
+      if (opts?.limit != null) params.set("limit", String(opts.limit));
+      if (opts?.cursor) params.set("cursor", opts.cursor);
+      if (opts?.tag) params.set("tag", opts.tag);
+      const qs = params.toString();
+      return gatewayFetch<BlogPostsPage>(`/blog/posts${qs ? `?${qs}` : ""}`);
+    },
+    post: (idOrSlug: string) =>
+      gatewayFetch<BlogPostDetail>(
+        `/blog/posts/${encodeURIComponent(idOrSlug)}`
+      ),
+    latest: async (limit = 5) => {
+      const page = await gatewayFetch<BlogPostsPage>(
+        `/blog/posts?limit=${encodeURIComponent(String(limit))}`
+      );
+      return page.items;
+    },
   },
   cv: {
     url: () => `${GATEWAY_URL}/cv/cv`,
+  },
+  /** Q&A via Next BFF → MCP orchestrator (API key stays server-side). */
+  ask: {
+    question: (question: string, idempotencyKey?: string) =>
+      gatewayFetch<AskResponse>("/api/ask", {
+        method: "POST",
+        body: JSON.stringify({ question }),
+        headers: idempotencyKey
+          ? { "Idempotency-Key": idempotencyKey }
+          : undefined,
+      }),
   },
 };
 

@@ -38,12 +38,6 @@ export function AppNav() {
       >
         CV
       </Link>
-      <Link
-        href="/docs"
-        className=""
-      >
-        Docs
-      </Link>
       <div className="ml-auto flex items-center gap-4">
         {isReady &&
           (token ? (
