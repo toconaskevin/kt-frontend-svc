@@ -22,11 +22,11 @@ export function BlogPostCard({ post, onNavigate }: BlogPostCardProps) {
   return (
     <article
       id={`post-${post.id}`}
-      className="neon-divider border-b py-3 sm:py-4"
+      className="card-surface mb-4 overflow-hidden p-4 sm:p-5"
     >
       <Link
         href={href}
-        className="block outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[var(--neon-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]"
+        className="block outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]"
         onClick={() => onNavigate?.(post)}
       >
         <div className="text-base font-semibold leading-snug tracking-tight text-[var(--foreground)] sm:text-lg">
@@ -36,7 +36,7 @@ export function BlogPostCard({ post, onNavigate }: BlogPostCardProps) {
           {tags.map((tag, i) => (
             <span key={tag} className="inline-flex items-center gap-x-1.5">
               {i > 0 ? <span aria-hidden="true">·</span> : null}
-              <span className="text-[var(--neon-cyan)]">{tag}</span>
+              <span className="font-semibold text-[var(--brand)]">{tag}</span>
             </span>
           ))}
           {tags.length > 0 && post.published_at ? (

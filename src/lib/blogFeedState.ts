@@ -32,14 +32,6 @@ export function loadBlogFeedState(): BlogFeedPersistedState | null {
   }
 }
 
-export function clearBlogFeedState(): void {
-  try {
-    sessionStorage.removeItem(FEED_STATE_KEY);
-  } catch {
-    /* ignore */
-  }
-}
-
 /** Apply saved scroll/focus after returning to the feed (Link or browser back). */
 export function restoreBlogFeedScroll(tag?: string): boolean {
   const saved = loadBlogFeedState();

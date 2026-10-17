@@ -1,30 +1,39 @@
 "use client";
 
 import { api } from "@/lib/api";
-import { AppNav } from "@/components/AppNav";
+import { PageShell } from "@/components/PageShell";
 
 export default function CVPage() {
-  const cvUrl = api.cv.url();
+  const cvDownloadUrl = api.cv.url({ download: true });
+  const cvViewUrl = api.cv.url();
 
   return (
-    <div className="neon-page">
-      <AppNav />
-      <div className="w-full min-w-0 px-4 py-8">
-      <div className="mx-auto w-full min-w-0 max-w-2xl">
-        <h1 className="mt-4 text-2xl font-semibold">CV</h1>
-        <p className="neon-muted mt-1 text-sm">Download the CV (PDF)</p>
-        <div className="neon-surface mt-6 p-6">
-          <a
-            href={cvUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="neon-btn"
-          >
-            Download CV (PDF)
-          </a>
+    <PageShell>
+      <div className="site-container py-10 md:py-14">
+        <div className="mx-auto max-w-xl card-surface p-8">
+          <h1 className="text-3xl font-extrabold tracking-tight">CV</h1>
+          <p className="neon-muted mt-2 text-sm">
+            Download or open the latest CV (PDF).
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href={cvDownloadUrl}
+              className="btn-primary"
+              download="Kevin-Toconas-CV.pdf"
+            >
+              Download CV (PDF)
+            </a>
+            <a
+              href={cvViewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              Open in browser
+            </a>
+          </div>
         </div>
       </div>
-      </div>
-    </div>
+    </PageShell>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { api, type FullProfile } from "@/lib/api";
-import { AppNav } from "@/components/AppNav";
+import { PageShell } from "@/components/PageShell";
 
 function formatMonthYear(value?: string | null) {
   if (!value) return "";
@@ -55,11 +55,10 @@ export default function ProfilePage() {
   }, []);
 
   return (
-    <div className="neon-page">
-      <AppNav />
+    <PageShell email={profile?.email} social={profile?.social_media}>
       <div className="w-full min-w-0 px-4 py-8">
       <div className="mx-auto w-full min-w-0 max-w-2xl">
-        <h1 className="mt-4 text-2xl font-semibold">Profile</h1>
+        <h1 className="mt-4 text-2xl font-semibold">About</h1>
         <p className="neon-muted mt-1 text-sm">Professional profile</p>
 
         <div className="neon-surface mt-6 p-6">
@@ -98,6 +97,26 @@ export default function ProfilePage() {
                   </ul>
                 )}
               </div>
+
+              {profile.tech_stack.length > 0 && (
+                <Section title="Tech stack">
+                  <ul className="flex flex-wrap gap-2">
+                    {profile.tech_stack.map((item) => (
+                      <li
+                        key={item.id}
+                        className="neon-pill rounded-md px-2.5 py-1 text-sm"
+                      >
+                        {item.name}
+                        {item.category && (
+                          <span className="neon-muted ml-1">
+                            ({item.category})
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </Section>
+              )}
 
               {profile.core_competencies.length > 0 && (
                 <Section title="Core competencies">
@@ -231,6 +250,7 @@ export default function ProfilePage() {
                 !profile.location &&
                 profile.education.length === 0 &&
                 profile.core_competencies.length === 0 &&
+                profile.tech_stack.length === 0 &&
                 profile.languages.length === 0 &&
                 profile.certifications.length === 0 &&
                 profile.professional_experience.length === 0 && (
@@ -248,6 +268,6 @@ export default function ProfilePage() {
         </div>
       </div>
       </div>
-    </div>
+    </PageShell>
   );
 }

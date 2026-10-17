@@ -1,38 +1,40 @@
 @import "tailwindcss";
 
-/* clip (not hidden): overflow-x:hidden pairs with overflow-y:auto and
-   creates nested scroll containers on html/body → double vertical scrollbar */
 html {
   overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
 :root {
-  /* Neon retro palette (inspired by provided references) */
-  --background: #070012;
-  --foreground: #eaf6ff;
+  --background: #f5f7fb;
+  --foreground: #0f172a;
+  --muted-foreground: #64748b;
+  --muted-foreground-2: #94a3b8;
 
-  --muted-foreground: rgba(234, 246, 255, 0.72);
-  --muted-foreground-2: rgba(234, 246, 255, 0.55);
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #e2e8f0;
 
-  --surface: rgba(10, 2, 24, 0.68);
-  --surface-2: rgba(10, 2, 24, 0.5);
-  --border: rgba(120, 70, 255, 0.35);
+  --brand: #2563eb;
+  --brand-hover: #1d4ed8;
+  --brand-soft: #eff6ff;
+  --brand-ink: #1e3a8a;
 
-  --neon-pink: #ff4fd8;
-  --neon-cyan: #3be8ff;
-  --neon-purple: #a855f7;
-  --neon-yellow: #ffe66d;
+  --footer: #0b1220;
+  --footer-fg: #e2e8f0;
 
-  --glow-pink: 0 0 24px rgba(255, 79, 216, 0.55);
-  --glow-cyan: 0 0 28px rgba(59, 232, 255, 0.4);
-  --glow-purple: 0 0 28px rgba(168, 85, 247, 0.35);
-
-  --radius-lg: 16px;
-  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
   --radius-sm: 10px;
 
-  --font-display: var(--font-neon-display);
-  --font-ui: var(--font-neon-ui);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 24px 60px rgba(37, 99, 235, 0.12);
+
+  --font-display: var(--font-jakarta);
+  --font-ui: var(--font-jakarta);
+
+  --neon-cyan: var(--brand);
 }
 
 @theme inline {
@@ -42,25 +44,17 @@ html {
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Keep neon aesthetic in dark mode too */
-    --background: #070012;
-    --foreground: #eaf6ff;
-  }
-}
-
 body {
   overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-ui), var(--font-geist-sans), system-ui, -apple-system, Segoe UI,
-    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: var(--font-ui), system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, sans-serif;
 }
 
 @layer base {
   ::selection {
-    background: rgba(255, 79, 216, 0.35);
+    background: rgba(37, 99, 235, 0.18);
     color: var(--foreground);
   }
 
@@ -68,26 +62,23 @@ body {
     color: inherit;
   }
 
-  code,
-  pre {
-    font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
-      Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
   }
 
   h1,
   h2,
   h3 {
-    font-family: var(--font-display), var(--font-ui), var(--font-geist-sans),
-      system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    letter-spacing: 0.02em;
-    text-shadow: 0 0 10px rgba(234, 246, 255, 0.28), var(--glow-cyan);
+    font-family: var(--font-display), var(--font-ui), system-ui, sans-serif;
+    letter-spacing: -0.02em;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 }
 
 @layer components {
-  .neon-page {
+  .site-page {
     flex: 1 0 auto;
     display: flex;
     flex-direction: column;
@@ -96,116 +87,212 @@ body {
     max-width: 100%;
     color: var(--foreground);
     background:
-      radial-gradient(1000px 500px at 50% 15%, rgba(255, 79, 216, 0.22), rgba(255, 79, 216, 0) 55%),
-      radial-gradient(900px 520px at 70% 35%, rgba(59, 232, 255, 0.18), rgba(59, 232, 255, 0) 60%),
-      radial-gradient(950px 540px at 25% 55%, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0) 60%),
-      linear-gradient(180deg, rgba(255, 79, 216, 0.1), rgba(7, 0, 18, 0) 40%),
-      linear-gradient(180deg, #0b001b, #070012 45%, #060010);
+      radial-gradient(720px 420px at 18% 22%, rgba(37, 99, 235, 0.1), transparent 62%),
+      radial-gradient(560px 320px at 8% 40%, rgba(14, 165, 233, 0.07), transparent 58%),
+      linear-gradient(180deg, #ffffff 0%, var(--background) 70vh);
     position: relative;
     overflow-x: clip;
   }
 
-  .neon-page::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.25;
-    background:
-      linear-gradient(to right, rgba(255, 79, 216, 0.45) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 79, 216, 0.35) 1px, transparent 1px);
-    background-size: 52px 52px;
-    transform: perspective(900px) rotateX(62deg) translateY(24%);
-    transform-origin: center;
-    filter: blur(0.15px);
-    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent 60%);
+  .site-container {
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
   }
 
-  .neon-page::after {
-    content: "";
-    position: absolute;
-    inset: -20% 0;
-    pointer-events: none;
-    opacity: 0.35;
-    background:
-      repeating-linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.03),
-        rgba(255, 255, 255, 0.03) 2px,
-        rgba(0, 0, 0, 0.07) 3px,
-        rgba(0, 0, 0, 0.07) 6px
-      ),
-      linear-gradient(
-        to bottom,
-        rgba(59, 232, 255, 0) 0%,
-        rgba(59, 232, 255, 0.12) 45%,
-        rgba(255, 79, 216, 0.16) 55%,
-        rgba(255, 79, 216, 0) 100%
-      );
-    mix-blend-mode: overlay;
-    animation: neon-scanlines 8s linear infinite;
-    mask-image: radial-gradient(closest-side at 50% 40%, rgba(0, 0, 0, 1), transparent 78%);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .neon-page::after {
-      animation: none;
-      opacity: 0.22;
+  @media (min-width: 768px) {
+    .site-container {
+      padding-inline: 1.75rem;
     }
   }
 
-  .neon-nav {
-    background: rgba(9, 2, 22, 0.6);
-    border-bottom: 1px solid rgba(255, 79, 216, 0.22);
-    backdrop-filter: blur(10px);
-    font-family: var(--font-display), var(--font-ui), var(--font-geist-sans),
-      system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    letter-spacing: 0.02em;
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.7rem 1.25rem;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
+    transition: background 140ms ease, transform 140ms ease, box-shadow 140ms ease;
   }
 
-  .neon-nav a,
-  .neon-nav button {
-    color: var(--muted-foreground);
+  .btn-primary:hover {
+    background: var(--brand-hover);
+    transform: translateY(-1px);
   }
 
-  .neon-nav a:hover,
-  .neon-nav button:hover {
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.7rem 1.25rem;
+    border-radius: 999px;
+    border: 1.5px solid #cbd5e1;
+    background: #fff;
     color: var(--foreground);
-    text-shadow: var(--glow-cyan);
+    font-weight: 600;
+    transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
   }
 
-  .neon-nav a,
-  .neon-nav button {
-    text-shadow: 0 0 10px rgba(234, 246, 255, 0.16);
+  .btn-secondary:hover {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+    transform: translateY(-1px);
   }
 
-  .neon-sign {
-    color: rgba(245, 251, 255, 0.95);
-    text-shadow:
-      0 0 1px rgba(245, 251, 255, 0.75),
-      0 0 12px rgba(245, 251, 255, 0.35),
-      0 0 28px rgba(245, 251, 255, 0.22),
-      0 0 40px rgba(59, 232, 255, 0.22),
-      0 0 52px rgba(255, 79, 216, 0.18);
+  .section-title {
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    font-weight: 700;
+    color: var(--foreground);
+  }
+
+  .section-kicker {
+    color: var(--brand);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .competency-cycle {
+    width: 100%;
+    max-width: 26rem;
+  }
+
+  .competency-rail {
+    position: relative;
+    height: 280px;
+    margin-top: 0.85rem;
+    padding-left: 8px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  }
+
+  .competency-rail::before,
+  .competency-stack.is-static::before {
+    content: "";
+    position: absolute;
+    top: 0.55rem;
+    bottom: 0.55rem;
+    left: 13px;
+    width: 1px;
+    background: #e2e8f0;
+  }
+
+  .competency-rail-track {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: transform 780ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .competency-rail-track.is-instant,
+  .competency-rail-track.is-instant .competency-rail-row,
+  .competency-rail-track.is-instant .competency-rail-dot::after {
+    transition: none;
+  }
+
+  .competency-rail-row,
+  .competency-stack.is-static li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    height: 40px;
+    margin: 0;
+    color: var(--muted-foreground);
+    font-size: 0.98rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    transition: opacity 780ms ease, color 780ms ease, font-size 780ms ease;
+  }
+
+  .competency-rail-row.is-active,
+  .competency-stack.is-static li.is-active {
+    color: var(--foreground);
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+
+  .competency-rail-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .competency-rail-dot {
+    display: grid;
+    width: 11px;
+    height: 11px;
+    flex: none;
+    place-items: center;
+  }
+
+  .competency-rail-dot::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #cbd5e1;
+    transition: width 780ms ease, height 780ms ease, background 780ms ease, box-shadow 780ms ease;
+  }
+
+  .competency-rail-row.is-active .competency-rail-dot::after,
+  .competency-stack.is-static li.is-active .competency-rail-dot::after {
+    width: 11px;
+    height: 11px;
+    background: var(--brand);
+    box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.18);
+  }
+
+  .competency-stack.is-static {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin: 0.85rem 0 0;
+    padding: 0 0 0 8px;
+    list-style: none;
+  }
+
+  @media (min-width: 1024px) {
+    .competency-cycle {
+      margin-left: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .competency-rail-track {
+      transition: none;
+    }
+  }
+
+  .card-surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
   }
 
   .neon-surface {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    box-shadow: var(--glow-purple);
-    backdrop-filter: blur(10px);
-  }
-
-  .neon-card {
-    background: var(--surface-2);
-    border: 1px solid rgba(59, 232, 255, 0.22);
-    border-radius: var(--radius-md);
-    box-shadow: var(--glow-cyan);
+    box-shadow: var(--shadow-sm);
   }
 
   .neon-divider {
-    border-color: rgba(255, 79, 216, 0.18);
+    border-color: var(--border);
   }
 
   .neon-muted {
@@ -217,30 +304,21 @@ body {
   }
 
   .neon-link {
-    color: var(--neon-cyan);
+    color: var(--brand);
     text-decoration: none;
-    border-bottom: 1px solid rgba(59, 232, 255, 0.55);
-    box-shadow: inset 0 -1px 0 rgba(59, 232, 255, 0.25);
+    font-weight: 600;
   }
 
   .neon-link:hover {
-    color: var(--neon-pink);
-    border-bottom-color: rgba(255, 79, 216, 0.7);
-    text-shadow: var(--glow-pink);
+    color: var(--brand-hover);
+    text-decoration: underline;
   }
 
   .neon-pill {
-    background: rgba(255, 79, 216, 0.12);
-    border: 1px solid rgba(255, 79, 216, 0.25);
-    color: rgba(234, 246, 255, 0.9);
-    box-shadow: 0 0 18px rgba(255, 79, 216, 0.18);
-  }
-
-  .neon-badge {
-    background: rgba(59, 232, 255, 0.16);
-    border: 1px solid rgba(59, 232, 255, 0.35);
-    color: rgba(234, 246, 255, 0.95);
-    text-shadow: 0 0 16px rgba(59, 232, 255, 0.22);
+    background: var(--brand-soft);
+    border: 1px solid #bfdbfe;
+    color: var(--brand-ink);
+    border-radius: 999px;
   }
 
   .neon-btn {
@@ -248,85 +326,23 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(59, 232, 255, 0.35);
-    background: rgba(10, 2, 24, 0.55);
-    color: rgba(234, 246, 255, 0.9);
-    box-shadow: var(--glow-cyan);
-    transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
-    font-family: var(--font-display), var(--font-ui), var(--font-geist-sans),
-      system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    letter-spacing: 0.02em;
-    text-shadow: 0 0 10px rgba(234, 246, 255, 0.18);
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    border: none;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
   }
 
   .neon-btn:hover {
-    transform: translateY(-1px);
-    border-color: rgba(255, 79, 216, 0.5);
-    box-shadow: var(--glow-pink);
-  }
-
-  .neon-btn:active {
-    transform: translateY(0px);
-  }
-
-  .ask-input {
-    background: rgba(10, 2, 24, 0.72);
-    border: 1px solid rgba(59, 232, 255, 0.28);
-    border-radius: var(--radius-sm);
-    color: var(--foreground);
-    box-shadow: inset 0 0 18px rgba(59, 232, 255, 0.06);
-    outline: none;
-  }
-
-  .ask-input::placeholder {
-    color: var(--muted-foreground-2);
-  }
-
-  .ask-input:focus {
-    border-color: rgba(255, 79, 216, 0.45);
-    box-shadow: var(--glow-pink), inset 0 0 18px rgba(255, 79, 216, 0.08);
-  }
-
-  .ask-input:disabled {
-    opacity: 0.65;
-  }
-
-  .ask-bubble-user {
-    background: rgba(255, 79, 216, 0.14);
-    border: 1px solid rgba(255, 79, 216, 0.35);
-    border-radius: var(--radius-md) var(--radius-md) var(--radius-sm) var(--radius-md);
-    box-shadow: 0 0 18px rgba(255, 79, 216, 0.16);
-  }
-
-  .ask-bubble-assistant {
-    background: rgba(59, 232, 255, 0.1);
-    border: 1px solid rgba(59, 232, 255, 0.28);
-    border-radius: var(--radius-md) var(--radius-md) var(--radius-md) var(--radius-sm);
-    box-shadow: 0 0 18px rgba(59, 232, 255, 0.12);
-  }
-
-  .ask-typing-dot {
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 999px;
-    background: var(--neon-cyan);
-    box-shadow: var(--glow-cyan);
-    animation: ask-typing 1.1s ease-in-out infinite;
-  }
-
-  .ask-typing-dot:nth-child(2) {
-    animation-delay: 0.15s;
-  }
-
-  .ask-typing-dot:nth-child(3) {
-    animation-delay: 0.3s;
+    background: var(--brand-hover);
   }
 
   .md-content {
     font-size: 0.95rem;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--foreground);
     overflow-wrap: anywhere;
   }
@@ -347,15 +363,14 @@ body {
 
   .md-content p {
     margin: 1rem 0;
-    color: rgba(234, 246, 255, 0.9);
+    color: #334155;
   }
 
   .md-content h2,
   .md-content h3,
   .md-content h4 {
     margin: 1.75rem 0 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-weight: 700;
   }
 
   .md-content h2 {
@@ -366,15 +381,11 @@ body {
     font-size: 1.15rem;
   }
 
-  .md-content h4 {
-    font-size: 1.05rem;
-  }
-
   .md-content ul,
   .md-content ol {
     margin: 0.85rem 0;
     padding-left: 1.35rem;
-    color: rgba(234, 246, 255, 0.88);
+    color: #334155;
   }
 
   .md-content li {
@@ -382,14 +393,14 @@ body {
   }
 
   .md-content li::marker {
-    color: var(--neon-cyan);
+    color: var(--brand);
   }
 
   .md-content blockquote {
     margin: 1.1rem 0;
     padding: 0.65rem 1rem;
-    border-left: 3px solid rgba(255, 79, 216, 0.55);
-    background: rgba(255, 79, 216, 0.08);
+    border-left: 3px solid var(--brand);
+    background: var(--brand-soft);
     color: var(--muted-foreground);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   }
@@ -397,7 +408,7 @@ body {
   .md-content hr {
     margin: 1.75rem 0;
     border: none;
-    border-top: 1px solid rgba(255, 79, 216, 0.22);
+    border-top: 1px solid var(--border);
   }
 
   .md-content table {
@@ -409,33 +420,32 @@ body {
 
   .md-content th,
   .md-content td {
-    border: 1px solid rgba(59, 232, 255, 0.22);
+    border: 1px solid var(--border);
     padding: 0.5rem 0.65rem;
     text-align: left;
   }
 
   .md-content th {
-    background: rgba(59, 232, 255, 0.1);
-    color: var(--neon-cyan);
+    background: var(--brand-soft);
+    color: var(--brand-ink);
   }
 
   .md-inline-code {
     padding: 0.12rem 0.4rem;
     border-radius: 6px;
-    background: rgba(59, 232, 255, 0.12);
-    border: 1px solid rgba(59, 232, 255, 0.28);
-    color: var(--neon-yellow);
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    color: #0f172a;
     font-size: 0.88em;
   }
 
   .md-pre {
     margin: 1.15rem 0;
-    padding: 0;
     overflow-x: auto;
     border-radius: var(--radius-md);
-    border: 1px solid rgba(59, 232, 255, 0.28);
-    background: rgba(6, 0, 16, 0.92);
-    box-shadow: var(--glow-cyan);
+    border: 1px solid var(--border);
+    background: #0f172a;
+    box-shadow: var(--shadow-sm);
   }
 
   .md-pre code {
@@ -446,6 +456,7 @@ body {
     font-size: 0.85rem;
     line-height: 1.55;
     overflow-x: auto;
+    color: #e2e8f0;
   }
 
   .md-code-lang {
@@ -455,10 +466,9 @@ body {
     font-size: 0.65rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--neon-cyan);
-    opacity: 0.85;
+    color: #93c5fd;
+    opacity: 0.9;
     pointer-events: none;
-    font-family: var(--font-display), var(--font-ui), system-ui, sans-serif;
   }
 
   .md-img {
@@ -468,8 +478,7 @@ body {
     height: auto;
     margin: 1.25rem 0;
     border-radius: var(--radius-md);
-    border: 1px solid rgba(255, 79, 216, 0.25);
-    box-shadow: var(--glow-purple);
+    border: 1px solid var(--border);
   }
 
   .md-mermaid {
@@ -477,13 +486,10 @@ body {
     overflow-x: auto;
     display: flex;
     justify-content: center;
-    /* Isolate from .md-content typography that breaks Mermaid label boxes */
     line-height: normal;
     overflow-wrap: normal;
     word-break: normal;
     font-size: 16px;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-      Helvetica, Arial, sans-serif;
   }
 
   .md-mermaid svg {
@@ -498,34 +504,19 @@ body {
     justify-content: center;
   }
 
-  .md-mermaid-error .md-pre {
-    margin-top: 0.75rem;
-  }
-
   .md-content .hljs {
     background: transparent;
-    color: #e6edf3;
+    color: #e2e8f0;
   }
 }
 
-@keyframes neon-scanlines {
-  0% {
-    transform: translateY(-10%);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  100% {
-    transform: translateY(10%);
-  }
-}
 
-@keyframes ask-typing {
-  0%,
-  80%,
-  100% {
-    opacity: 0.35;
-    transform: translateY(0);
-  }
-  40% {
-    opacity: 1;
-    transform: translateY(-2px);
+  .btn-primary,
+  .btn-secondary {
+    transition: none;
   }
 }

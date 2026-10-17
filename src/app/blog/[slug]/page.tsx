@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { AppNav } from "@/components/AppNav";
+import { PageShell } from "@/components/PageShell";
 import { MarkdownContent } from "@/components/MarkdownContent";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { api, type BlogPostDetail } from "@/lib/api";
@@ -57,9 +57,8 @@ export default function BlogPostPage() {
   const showCover = Boolean(post?.cover_image_url) && !coverFailed;
 
   return (
-    <div className="neon-page">
-      <AppNav />
-      <div className="w-full min-w-0 px-4 py-8">
+    <PageShell>
+      <div className="site-container py-10">
         <div className="mx-auto w-full min-w-0 max-w-2xl">
           <button
             type="button"
@@ -140,6 +139,6 @@ export default function BlogPostPage() {
         </div>
       </div>
       <ScrollToTopButton />
-    </div>
+    </PageShell>
   );
 }

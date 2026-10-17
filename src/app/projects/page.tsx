@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
-import { AppNav } from "@/components/AppNav";
+import { PageShell } from "@/components/PageShell";
 
 type Project = {
   _id?: string;
@@ -35,51 +35,55 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div className="neon-page">
-      <AppNav />
-      <div className="w-full min-w-0 px-4 py-8">
-      <div className="mx-auto w-full min-w-0 max-w-2xl">
-        <h1 className="mt-4 text-2xl font-semibold">Projects</h1>
-        <p className="neon-muted mt-1 text-sm">List of projects</p>
-        <div className="neon-surface mt-6 p-6">
-          {loading && <p className="neon-muted">Loading…</p>}
-          {error && (
-            <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-          )}
-          {!loading && !error && (
-            <ul className="space-y-4">
-              {projects.length === 0 ? (
-                <li className="neon-muted">No projects yet.</li>
-              ) : (
-                projects.map((p, idx) => (
-                  <li
-                    key={p._id ?? p.name ?? String(idx)}
-                    className="neon-divider border-b pb-4 last:border-0"
-                  >
-                    <div className="font-medium">{p.name ?? "Untitled"}</div>
-                    {p.description && (
-                      <p className="neon-muted mt-1 text-sm">
+    <PageShell>
+      <div className="site-container py-10 md:py-14">
+        <h1 className="text-3xl font-extrabold tracking-tight">Projects</h1>
+        <p className="neon-muted mt-2 text-sm">
+          Public work and technical evidence.
+        </p>
+        {loading && <p className="neon-muted mt-8">Loading…</p>}
+        {error && (
+          <p className="mt-8 text-sm text-red-600">{error}</p>
+        )}
+        {!loading && !error && (
+          <ul className="mt-8 grid gap-5 md:grid-cols-2">
+            {projects.length === 0 ? (
+              <li className="card-surface p-6 text-sm text-[color:var(--muted-foreground)] md:col-span-2">
+                No projects yet.
+              </li>
+            ) : (
+              projects.map((p, idx) => (
+                <li
+                  key={p._id ?? p.name ?? String(idx)}
+                  className="card-surface flex flex-col overflow-hidden"
+                >
+                  <div className="flex h-28 items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-sky-700 px-4 text-center text-sm font-semibold text-white">
+                    {p.name ?? "Project"}
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="text-lg font-bold">{p.name ?? "Untitled"}</div>
+                    {p.description ? (
+                      <p className="neon-muted mt-2 text-sm leading-relaxed">
                         {p.description}
                       </p>
-                    )}
-                    {p.url && (
+                    ) : null}
+                    {p.url ? (
                       <a
                         href={p.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="neon-link mt-2 inline-block text-sm"
+                        className="neon-link mt-4 inline-block text-sm"
                       >
-                        {p.url}
+                        View details →
                       </a>
-                    )}
-                  </li>
-                ))
-              )}
-            </ul>
-          )}
-        </div>
+                    ) : null}
+                  </div>
+                </li>
+              ))
+            )}
+          </ul>
+        )}
       </div>
-      </div>
-    </div>
+    </PageShell>
   );
 }

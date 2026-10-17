@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Orbitron, Rajdhani } from "next/font/google";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const geistMono = Geist_Mono({
@@ -13,20 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const neonDisplay = Orbitron({
-  variable: "--font-neon-display",
-  subsets: ["latin"],
-});
-
-const neonUi = Rajdhani({
-  variable: "--font-neon-ui",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "Kevin Alejandro Toconás",
-  description: "Profile and portfolio website of Kevin Alejandro Toconás",
+  title: "Kevin Toconás — DevOps & Cloud",
+  description:
+    "Portfolio of Kevin Toconás — DevOps, cloud infrastructure, automation and CI/CD.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -44,14 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${neonDisplay.variable} ${neonUi.variable} antialiased`}
-      >
-        <AuthProvider>
-          <div className="flex min-h-screen min-h-[100dvh] w-full max-w-full min-w-0 flex-col overflow-x-clip">
-            {children}
-          </div>
-        </AuthProvider>
+      <body className={`${jakarta.variable} ${geistMono.variable} antialiased`}>
+        <div className="flex min-h-screen min-h-[100dvh] w-full max-w-full min-w-0 flex-col overflow-x-clip">
+          {children}
+        </div>
       </body>
     </html>
   );

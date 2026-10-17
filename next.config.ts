@@ -4,7 +4,6 @@ const gatewayInternal =
   process.env.API_GATEWAY_INTERNAL_URL?.trim() || "http://localhost:8080";
 
 const apiRewrites = [
-  { source: "/auth/:path*", destination: `${gatewayInternal}/auth/:path*` },
   { source: "/profile/:path*", destination: `${gatewayInternal}/profile/:path*` },
   { source: "/projects/:path*", destination: `${gatewayInternal}/projects/:path*` },
   { source: "/cv/:path*", destination: `${gatewayInternal}/cv/:path*` },

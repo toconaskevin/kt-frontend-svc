@@ -21,7 +21,7 @@ export function ScrollToTopButton() {
   return (
     <button
       type="button"
-      className="neon-btn fixed bottom-5 right-5 z-40 h-11 w-11 p-0 shadow-[var(--glow-cyan)]"
+      className="neon-btn fixed bottom-5 right-5 z-40 h-11 w-11 p-0"
       aria-label="Back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >
