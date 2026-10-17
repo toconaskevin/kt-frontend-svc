@@ -1,4 +1,6 @@
 /** Same-origin API paths; Next.js rewrites proxy to internal ingress (see next.config.ts). */
+import { getOrCreateVisitorId } from "@/lib/visitorId";
+
 const GATEWAY_URL = "";
 
 function getToken(): string | null {
@@ -181,14 +183,19 @@ export const api = {
   },
   /** Q&A via Next BFF → MCP orchestrator (API key stays server-side). */
   ask: {
-    question: (question: string, idempotencyKey?: string) =>
-      gatewayFetch<AskResponse>("/api/ask", {
+    question: (question: string, idempotencyKey?: string) => {
+      const headers: Record<string, string> = {
+        "X-Visitor-Id": getOrCreateVisitorId(),
+      };
+      if (idempotencyKey) {
+        headers["Idempotency-Key"] = idempotencyKey;
+      }
+      return gatewayFetch<AskResponse>("/api/ask", {
         method: "POST",
         body: JSON.stringify({ question }),
-        headers: idempotencyKey
-          ? { "Idempotency-Key": idempotencyKey }
-          : undefined,
-      }),
+        headers,
+      });
+    },
   },
 };
 

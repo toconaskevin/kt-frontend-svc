@@ -307,6 +307,34 @@ body {
     box-shadow: 0 0 18px rgba(59, 232, 255, 0.12);
   }
 
+  /* Tighter markdown inside chat bubbles (blog .md-content is more spacious). */
+  .ask-md.md-content {
+    font-size: inherit;
+    line-height: 1.55;
+  }
+
+  .ask-md.md-content p {
+    margin: 0.45rem 0;
+  }
+
+  .ask-md.md-content > :first-child {
+    margin-top: 0;
+  }
+
+  .ask-md.md-content > :last-child {
+    margin-bottom: 0;
+  }
+
+  .ask-md.md-content ul,
+  .ask-md.md-content ol {
+    margin: 0.4rem 0;
+  }
+
+  .ask-md.md-content strong {
+    font-weight: 600;
+    color: rgba(234, 246, 255, 0.98);
+  }
+
   .ask-typing-dot {
     width: 0.4rem;
     height: 0.4rem;
